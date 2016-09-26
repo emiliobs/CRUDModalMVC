@@ -1,0 +1,79 @@
+﻿@model CRUDModalMVC.Models.Student
+
+@{
+
+    Layout = null;
+
+}
+
+
+@using (Ajax.BeginForm("AddEditRecord", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "studentDialog" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Student</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @if (ViewBag.IsUpdate == true)
+        {
+            @Html.HiddenFor(model => model.StudenId);
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 editor-field">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 editor-field">
+                @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 editor-field">
+                @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 editor-field">
+                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="text-align:center">
+
+                @if (ViewBag.IsUpdate == true)
+                {
+                    <input type="submit" name="cmd" value="Update" id="btnUpdate" class="btn btn-info" />
+                }
+                else
+                {
+                    <input type="submit" name="cmd" value="Save" id="btnSave" class="btn btn-success" />
+                }
+
+                @*<input type="button" value="Cancel" name="cmd" id="btnCancel" class="btn btn-warning" />*@
+                @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-warning" })
+
+
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
